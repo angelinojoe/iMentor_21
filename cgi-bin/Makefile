@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -Werror -Wextra -pedantic -std=c++0x
+CXXFLAGS = -std=c++0x
 CXX=g++
 
 all: imentor

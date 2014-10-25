@@ -91,9 +91,10 @@ int Curriculum::filterByKeyword(Email & email)
 
 			numberOfKeyWords += email.getNumberOfKeywordOccurences(getKeyword(KeyWordindex));
 			email.addKeyWord(getKeyword(KeyWordindex));
-			KeyWordindex++;
+			
 
 		}
+		KeyWordindex++;
 	}
 
 	return numberOfKeyWords;
