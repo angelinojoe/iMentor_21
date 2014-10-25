@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <iostream>
 #include "Utilities.h" //make upper
 
 
@@ -31,6 +32,7 @@ public:
 	//Effects: returns the number of occurences for a given keyword
 	int getNumberOfKeywordOccurences(const std::string & keyword) const; 
 
+	int getTotalNumberOfKeyWords()const { return keywordsContained.size(); }
 	//Requires:
 	//Modifies:
 	//Effects: Returns the number of words in the email
@@ -41,11 +43,14 @@ public:
 	//Effects: adds keywords to list of key words used in text
 	void addKeyWord(std::string keyword){ keywordsContained.push_back(keyword);  }
 
+	int getScore()const { return score;  }
+
 	//Requires: Score be between 1 and 5 inclusive [1,5]
 	//Modifies: score
 	//Effects: sets score
-	int setScore(const int & score){ this->score = score;  }
+	void setScore(const int & score){ this->score = score;  }
 	
+	void printKeywordsContained(); 
 
 private:
 	//Key words contained
@@ -112,6 +117,16 @@ int Email::getWordCount() const
 	return getNumberOfKeywordOccurences(" ") + 2;
 }
 
+
+void Email::printKeywordsContained()
+{
+	for (unsigned int i = 0; i < keywordsContained.size(); i++)
+	{
+		std::cout << keywordsContained.at(i) << " "; 
+	}
+	std::cout << std::endl;
+
+}
 
 
 #endif

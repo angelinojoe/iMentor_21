@@ -39,6 +39,11 @@ public:
 	//Effects: returns the number of keywords
 	int getNumberOfKeyWords() const { return numberOfKeywords;  }
 
+	//Requires: curriculum and email are both initialized
+	//Modifies: email.score
+	//Effects: Returns true of false if the email has passed a certain threshold of filtering
+	//: will return true if at least 
+	int filterByKeyword(Email & email);
 private:
 	std::string text;
 	std::vector<std::string> keywords;
@@ -70,5 +75,27 @@ std::string Curriculum::getKeyword(unsigned int index) const
 	{
 		return keywords.at(index);
 	}
+}
+
+
+int Curriculum::filterByKeyword(Email & email)
+{
+	int KeyWordindex = 0;
+	int numberOfKeyWords = 0;
+
+
+	while (KeyWordindex < getNumberOfKeyWords())
+	{
+		if (email.DoesEmailContainKeyWord(getKeyword(KeyWordindex)))
+		{
+
+			numberOfKeyWords += email.getNumberOfKeywordOccurences(getKeyword(KeyWordindex));
+			email.addKeyWord(getKeyword(KeyWordindex));
+			KeyWordindex++;
+
+		}
+	}
+
+	return numberOfKeyWords;
 }
 #endif

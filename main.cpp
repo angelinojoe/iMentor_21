@@ -2,33 +2,48 @@
 #include "Email.h"
 #include "Utilities.h"
 #include <iostream>
+#include <vector>
+
+using namespace std; 
 
 
-//Requires: curriculum and email are both initialized
-//Modifies: email.score
-//Effects: Returns true of false if the email has passed a certain threshold of filtering
-//: will return true if at least 
-int filterByKeyword(const Curriculum & curriculum, Email & email, int minKeywordCount)
+//Requires: number of emails corresponds with the number of strings in email text, there are number of text email objects created
+//Modifies: emails, curriculum
+//Effects: adds data  curriculum and emails
+void inputData(std::string curriculumText, vector<std::string> & emailText,vector<int> & scores, Curriculum & curriculum, std::vector<Email> & emails)
 {
-	int KeyWordindex = 0;
-	int numberOfKeyWords = 0;
+	curriculum = Curriculum(curriculumText); // assign curriculum text
 
-
-	while (KeyWordindex < curriculum.getNumberOfKeyWords())
+	for (int i = 0; i < emailText.size(); i++)
 	{
-		if (email.DoesEmailContainKeyWord(curriculum.getKeyword(KeyWordindex)))
-		{
-
-			numberOfKeyWords += email.getNumberOfKeywordOccurences(curriculum.getKeyword(KeyWordindex));
-			email.addKeyWord(curriculum.getKeyword(KeyWordindex));
-			KeyWordindex++;
-
-		}
+		emails.at(i) = Email(emailText.at(i));
+		emails.at(i).setScore(scores.at(i));
 	}
-
-	return numberOfKeyWords;
 }
 
+void filterData(Curriculum & curriculum, std::vector<Email> & emails)//filters all emails using given keywords
+{
+	for (unsigned int i = 0; i < emails.size(); i++)
+	{
+		curriculum.filterByKeyword(emails.at(i));
+	}
+
+}
+
+void outPutData(Curriculum & curriculum, std::vector<Email> & emails)
+{
+	for (unsigned int i = 0; i < emails.size(); i++)
+	{
+		cout << "Email #: " << i + 1 << endl;
+		//number of key words used
+		cout << "Number of keywords used: " << emails.at(i).getTotalNumberOfKeyWords() << endl;
+		cout << "Key words used: " << endl;
+		emails.at(i).printKeywordsContained(); 
+		cout << "Given Score: " << emails.at(i).getScore() << endl;
+
+	}
+
+}
 
 using namespace std; 
 
@@ -46,7 +61,7 @@ int main()
 
 	//createScores for emails based on Curriculums
 
-	filterByKeyword(TestCurriculum, TestEmail, 5); 
+	TestCurriculum.filterByKeyword(TestEmail); 
 
 	return 0; 
 }
