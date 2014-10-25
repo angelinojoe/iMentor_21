@@ -11,6 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../CSS/imentor.css">
         <link rel="stylesheet" href="../CSS/bootstrap.css">
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     </head>
     <body>
         <img src="../Images/imentorlogo.png" alt="Logo">
@@ -44,6 +46,57 @@ and open the template in the editor.
         <option>Filter 4</option>
         <option>Filter 5</option>
         </select>&nbsp;&nbsp;&nbsp;<button>Remove Filter</button><br><br>
+
+        Email Select
+        <select id="email-id-select">
+        </select><br><br>
+
+        <p id="email-score-field"></p>
+
+        <script>
+        $(function () {
+            $.ajax({
+                'url': "/cgi-bin/imentor",
+                'data': {
+                    'action': 'numemails'
+                },
+
+                'success': function (data, textStatus, jqXHR) {
+                    for (var i = 1; i <= parseInt(data); i++) {
+                        $("#email-id-select").append("<option>"+i+"</option>");
+                    }
+                }
+            });
+
+            $("#email-id-select").change(function () {
+                $.ajax({
+                    'url': "/cgi-bin/imentor",
+                    'data': {
+                        'action': 'getscore',
+                        'id': $(this).val()
+                    },
+
+                    'success': function (data, textStatus, jqXHR) {
+                        $("#email-score-field").html(data);
+                    }
+                });
+            });
+
+            $.ajax({
+                'url': "/cgi-bin/imentor",
+                'data': {
+                    'action': 'getscore',
+                    'id': 1
+                },
+
+                'success': function (data, textStatus, jqXHR) {
+                    $("#email-score-field").html(data);
+                }
+            });
+
+        });
+        </script>
+
         <label>Desired Word Length:</label><br>
          <input type="text" name="wordlength" placeholder="300"><br><br> 
        <button>Update Curriculum</button>

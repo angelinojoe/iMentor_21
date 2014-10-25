@@ -44,6 +44,8 @@ void filterData(Curriculum & curriculum, std::vector<Email> & emails)//filters a
 
 void outPutData(Curriculum & curriculum, std::vector<Email> & emails, int id)
 {
+    cout << "<html><body>";
+
     if (id == -1) {
         for (unsigned int i = 0; i < emails.size(); i++)
         {
@@ -206,7 +208,6 @@ int main() {
     string query_string(query);
 
     cout << "Content-type: text/html" << endl << endl;
-    cout << "<html><body>";
 
     //cout << Utility::urlDecode(query_string) << "<br />";
 
@@ -215,12 +216,15 @@ int main() {
 
     map<std::string, std::string>::iterator it;
     int id = -1;
+    string action = "default";
 
     for (std::map<string, string>::iterator it=query_pairs.begin(); it!=query_pairs.end(); ++it) {
         //cout << it->first << " => " << it->second << "<br />";
         if (it->first.compare("id") == 0) id = stoi(it->second);
+        if (it->first.compare("action") == 0) action = it->second;
     }
 
+    //cout << action;
     //cout << "id is " << id;
 
     try {
@@ -253,6 +257,11 @@ int main() {
         while (res->next()) {
             emailText.push_back(res->getString("content"));
             scores.push_back(res->getInt("score"));
+        }
+
+        if (action.compare("numemails") == 0) {
+            cout << emailText.size();
+            return EXIT_SUCCESS;
         }
 
         useFunction(emailText, scores, curriculumText, id);
