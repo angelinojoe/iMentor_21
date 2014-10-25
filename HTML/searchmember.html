@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>iMentor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../CSS/imentor.css">
+        <link rel="stylesheet" href="../CSS/bootstrap.css">
+
+
+    </head>
+    <body>
+       <img src="../Images/imentorlogo.png" alt="Logo">
+        <div class="nav">
+      <div class="container">
+        <ul class="nav nav-tabs">
+          <li><a href="../index.html">Add Member</a></li>
+          <li><a href="../HTML/addemail.html">Add E-mail</a></li>
+          <li class="active"><a href="../HTML/searchmember.html">Search Member</a></li>
+          <li><a href="../HTML/searchscore.html">Search Scores</a></li>
+          <li><a href="../HTML/managecurriculum.html">Manage Curriculum</a></li>
+        </ul>
+      </div>
+    </div>
+       <section>
+       <br><br>
+    <h3>Search Scores by Member:</h3><br>
+    <form id="searchmember">
+        &nbsp;<label>First Name:</label>
+        <input type="text" name="firstname" placeholder="Enter First Name"><br><br>
+            &nbsp;<label>Last Name:</label>
+            <input type="text" name="lastname" placeholder="Enter Last Name">&nbsp;
+        <select name="Role">
+            <option value="Mentor">Mentor</option>
+            <option value="Mentee" selected>Mentee</option>
+        </select><br><br>
+       <button>Search Scores</button>
+       <table class="table">
+        <tr>
+          <th>First Name</th>  
+          <th>Last Name</th>
+          <th>Email Subject</th>
+          <th>Score</th>
+        </tr>  
+        <tr>
+            <td>John</td>
+            <td>Smith</td>
+            <td><a href="">Growth Mindset</a></td>
+            <td>4</td>
+        </tr>
+    </table>
+    </form><br><br>
+    
+    </section>
+    </body>
+</html>

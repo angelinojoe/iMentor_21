@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>iMentor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="Images/favicon.ico">
+        <link rel="stylesheet" href="CSS/imentor.css">
+        <link rel="stylesheet" href="CSS/bootstrap.css">
+        <script type="text/javascript" src="JS/addmember.js"></script>
+    </head>
+    <body>
+    <img src="Images/imentorlogo.png" alt="Logo">
+            
+    <div class="nav">
+      <div class="container">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="../addmember.html">Add Member</a></li>
+          <li><a href="HTML/addemail.html">Add E-mail</a></li>
+          <li><a href="HTML/searchmember.html">Search Member</a></li>
+          <li><a href="HTML/searchscore.html">Search Scores</a></li>
+          <li><a href="HTML/managecurriculum.html">Manage Curriculum</a></li>
+        </ul>
+      </div>
+    </div>
+    <section>
+    <br><br>
+    <h3>Add New Member</h3><br>
+    <form id="addmember">
+        &nbsp;<label>First Name:</label>
+        <input type="text" name="firstname" placeholder="Enter First Name"><br><br>
+            &nbsp;<label>Last Name:</label>
+            <input type="text" name="lastname" placeholder="Enter Last Name">&nbsp;
+        <select name="Role">
+            <option>Mentor</option>
+            <option selected>Mentee</option>
+        </select><br><br>
+       <button onclick="submitMember('Member')">Submit Member</button>
+    </form>
+    <div id="output"></div>
+    </section>
+    
+    </body>
+</html>
