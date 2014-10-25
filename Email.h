@@ -16,6 +16,7 @@ public:
 	//Modifies: EmailContent, EmailID
 	//Effects: inilizes Email Content and Email ID
 	Email(const std::string & EmailContent);
+	Email() :text(""), score(0){}
 
 	//Requires: 
 	//Modifies: 
@@ -78,6 +79,14 @@ Email::Email(const std::string & EmailContent) :score(0)
 //Effects: returns true or false depending on rather or not email contains key word
 bool Email::DoesEmailContainKeyWord(const std::string & keyword) const
 {
+	if (text.find(keyword) != text.npos)
+	{
+		return true; 
+	}
+	else
+	{
+		return false; 
+	}
 	return  (text.find(keyword) > 0) ? true : false;
 }
 

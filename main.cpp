@@ -3,6 +3,8 @@
 #include "Utilities.h"
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <cstdlib>
 
 using namespace std; 
 
@@ -12,9 +14,9 @@ using namespace std;
 //Effects: adds data  curriculum and emails
 void inputData(std::string curriculumText, vector<std::string> & emailText,vector<int> & scores, Curriculum & curriculum, std::vector<Email> & emails)
 {
-	curriculum = Curriculum(curriculumText); // assign curriculum text
+	
 
-	for (int i = 0; i < emailText.size(); i++)
+	for (unsigned int i = 0; i < emailText.size(); i++)
 	{
 		emails.at(i) = Email(emailText.at(i));
 		emails.at(i).setScore(scores.at(i));
@@ -34,14 +36,64 @@ void outPutData(Curriculum & curriculum, std::vector<Email> & emails)
 {
 	for (unsigned int i = 0; i < emails.size(); i++)
 	{
-		cout << "Email #: " << i + 1 << endl;
+		//cout << "Email #: " << i + 1 << endl;
 		//number of key words used
-		cout << "Number of keywords used: " << emails.at(i).getTotalNumberOfKeyWords() << endl;
-		cout << "Key words used: " << endl;
-		emails.at(i).printKeywordsContained(); 
-		cout << "Given Score: " << emails.at(i).getScore() << endl;
+	//	cout << "Number of keywords used: " << 
+		//cout << emails.at(i).getTotalNumberOfKeyWords() << endl;
+		//cout << "Key words used: " << endl;
+	//	emails.at(i).printKeywordsContained(); 
+	//	cout << "Number of words in message: " <<
+		cout <<emails.at(i).getWordCount() << endl;
+		//cout << "Given Score: " << emails.at(i).getScore() << endl << endl;
 
 	}
+
+}
+
+void useFunction()
+{
+	ifstream inputfile("emails.txt");
+	string inputtext; 
+	vector<string> emails; 
+	vector<int> scores;
+	string inputscore; 
+	
+	
+
+	while (!inputfile.eof())
+	{
+		getline(inputfile, inputtext);
+		getline(inputfile, inputscore);
+		emails.push_back(inputtext);
+		scores.push_back(atoi(inputscore.c_str()));
+	}
+
+	Curriculum curriculum(" ");
+	curriculum.addKeyWord("mindset");
+	curriculum.addKeyWord("fix");
+	curriculum.addKeyWord("growth");
+	curriculum.addKeyWord("Success");
+	curriculum.addKeyWord("college");
+	curriculum.addKeyWord("hard");
+	curriculum.addKeyWord("work");
+	curriculum.addKeyWord("dedication");
+	curriculum.addKeyWord("intelligence");
+	curriculum.addKeyWord("lack");
+	curriculum.addKeyWord("practice");
+	curriculum.addKeyWord("high");
+	curriculum.addKeyWord("low");
+	curriculum.addKeyWord("moment");
+	curriculum.addKeyWord("experience");
+	curriculum.addKeyWord("event");
+	curriculum.addKeyWord("positive");
+	curriculum.addKeyWord("negative");
+
+
+	vector<Email> emailsvec(emails.size());
+
+	inputData(" ", emails, scores, curriculum, emailsvec); 
+	filterData(curriculum, emailsvec); 
+	outPutData(curriculum, emailsvec); 
 
 }
 
@@ -49,6 +101,7 @@ using namespace std;
 
 int main()
 {
+	/*
 	//Input emails
 	Email TestEmail("I believe that one day I will be a successful Engineer\n");
 	cout << "Text " << TestEmail.getEmailContent() << endl << " contains ";
@@ -62,6 +115,9 @@ int main()
 	//createScores for emails based on Curriculums
 
 	TestCurriculum.filterByKeyword(TestEmail); 
+	*/
+	useFunction();
+
 
 	return 0; 
 }
