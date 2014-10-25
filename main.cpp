@@ -14,12 +14,14 @@ using namespace std;
 //Effects: adds data  curriculum and emails
 void inputData(std::string curriculumText, vector<std::string> & emailText,vector<int> & scores, Curriculum & curriculum, std::vector<Email> & emails)
 {
-	
+	Email temp; 
 
 	for (unsigned int i = 0; i < emailText.size(); i++)
 	{
-		emails.at(i) = Email(emailText.at(i));
-		emails.at(i).setScore(scores.at(i));
+		temp = Email(emailText.at(i));
+		temp.setScore(scores.at(i));
+		emails.at(i) = temp;
+
 	}
 }
 
@@ -36,15 +38,14 @@ void outPutData(Curriculum & curriculum, std::vector<Email> & emails)
 {
 	for (unsigned int i = 0; i < emails.size(); i++)
 	{
-		//cout << "Email #: " << i + 1 << endl;
+		cout << "Email #: " << i + 1 << endl;
 		//number of key words used
-	//	cout << "Number of keywords used: " << 
-		//cout << emails.at(i).getTotalNumberOfKeyWords() << endl;
-		//cout << "Key words used: " << endl;
-	//	emails.at(i).printKeywordsContained(); 
-	//	cout << "Number of words in message: " <<
-		cout <<emails.at(i).getWordCount() << endl;
-		//cout << "Given Score: " << emails.at(i).getScore() << endl << endl;
+		cout << "Number of keywords used: " << emails.at(i).getTotalNumberOfKeyWords() << endl;
+		cout << "Key words used: " << endl;
+		emails.at(i).printKeywordsContained(); 
+		cout << "Number of words in message: "  <<emails.at(i).getWordCount() << endl;
+		cout << "Given Score: " << emails.at(i).getScore() << endl ;
+		cout << "Predicted Score" << (((0.3397*emails.at(i).getTotalNumberOfKeyWords() + .0061*emails.at(i).getWordCount() + 2.1566)) / 2) << endl << endl;
 
 	}
 
